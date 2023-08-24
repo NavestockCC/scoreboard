@@ -1,0 +1,8 @@
+{
+    "port": "/dev/tty.usbmodem14302",
+    "configuration": "mode=on",
+    "board": "arduino:megaavr:uno2018",
+    "programmer": "medbg",
+    "sketch": "scoreboard_082023.ino",
+    "output": "../ArduinoOutput"
+}

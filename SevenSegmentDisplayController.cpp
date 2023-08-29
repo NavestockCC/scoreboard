@@ -11,20 +11,19 @@ const char* SCOREBOARD_CONFIG_JSON = "{\"displaySegments\":[{\"arduinoControlPin
 
 SevenSegmentDisplayController::SevenSegmentDisplayController() {
   // Deserialize the JSON document in the constructor
-
   DeserializationError error_alphabet = deserializeJson(display_doc, DISPLAY_JSON);
     if (error_alphabet) {
     Serial.print(F("deserialize scoreboardDisplayConfig_json failed: "));
     Serial.println(error_alphabet.f_str());
     return;
   }
-  DeserializationError error_display = deserializeJson(arduinoPinConfig_doc, SCOREBOARD_CONFIG_JSON);
+  DeserializationError error_display = deserializeJson(scoreboardDisplayConfig_doc, SCOREBOARD_CONFIG_JSON);
     if (error_display) {
     Serial.print(F("deserialize scoreboardDisplayConfig_json failed: "));
     Serial.println(error_display.f_str());
     return;
   }
-
+  arduinoPinConfig_doc = scoreboardDisplayConfig_doc.as<JsonObject>();
 
 }
 
@@ -47,7 +46,7 @@ void SevenSegmentDisplayController::initialiseArduinoPins(){
  * based on the json definition of the alpha numeric DISPLAY_JSON doc
  * @return - byte - hex-decimal value of the input character
  ***************************************************************************************/
-byte SevenSegmentDisplayController::binaryToDisplay(char toDisplay) {
+byte SevenSegmentDisplayController::binaryToDisplay(String toDisplay) {
   String byteString = display_doc[toDisplay];
   byte resultByte = (byte)strtol(byteString.c_str(), NULL, 16);
   return resultByte;

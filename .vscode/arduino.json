@@ -1,5 +1,5 @@
 {
-    "port": "/dev/tty.usbmodem14302",
+    "port": "/dev/tty.usbmodem2202",
     "configuration": "mode=on",
     "board": "arduino:megaavr:uno2018",
     "programmer": "medbg",

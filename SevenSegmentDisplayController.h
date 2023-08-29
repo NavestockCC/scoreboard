@@ -17,12 +17,17 @@ class SevenSegmentDisplayController {
 public:
   SevenSegmentDisplayController();
   byte binaryToDisplay(String toDisplay);
-  String displayUnitFormater(int displayUnitLength, String dataToDisplay);
-  void SevenSegmentDisplayController::initialiseArduinoPins();
+  void initialiseArduinoPins();
+  void writeDataToDisplay(String dataToDisplay, const char* segmentName);
+  int getDisplayUnitLength(const char* segmentName, const char* unitName);
+  int getDisplaySegmentLength(const char* segmentName);
+  int* getPinsBySegmentName(const char* segmentName);
+  String displaySegmentFormater(String dataToDisplay, const char* segmentName);
+  String displayUnitFormater(String dataToDisplay, const char* segmentName, const char* unitName);
 
 private:
   StaticJsonDocument<768> display_doc;
-  StaticJsonDocument<256> scoreboardDisplayConfig_doc;
+  StaticJsonDocument<768> scoreboardDisplayConfig_doc;
   JsonObject arduinoPinConfig_doc;
 };
 
